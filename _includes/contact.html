@@ -6,18 +6,23 @@
         <hr class="divider my-4">
         <p class="text-muted mb-5">{{ section.text }}</p>
       </div>
+    </div>
+    <div class="row justify-content-center">
       <div class="col-lg-8">
         <form id="contact-form" method="post">
-          <h2>Name:</h2>
-          <input type="text" style="height:35px;" id="name-input" placeholder="Enter name here…" class="form-control" style="width:100%;" /><br/>
-          <h2>Phone:</h2>
-          <input type="phone" style="height:35px;" id="phone-input" placeholder="Enter phone number" class="form-control" style="width:100%;"/><br/>
-          <h2>Email:</h2>
-          <input type="email" style="height:35px;" id="email-input" placeholder="Enter email here…" class="form-control" style="width:100%;"/><br/>
-          <h2>How can we help you?</h2>
-          <textarea id="description-input" rows="3" placeholder="Enter your message…" class="form-control" style="width:100%;"></textarea><br/>
-          <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" class="form-control" style="width:100%;"></div>
-          <button type="button" onClick="submitToAPI(event)" class="btn btn-lg" style="margin-top:20px;">Submit</button>
+          <div class="form-group"> 
+            <label>Email:</label>
+            <input type="email" id="email-input" placeholder="Enter email here…" aria-describedby="emailHelp" class="form-control" required />
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group"> 
+            <label>How can we help you?</label>
+            <textarea required id="description-input" rows="3" placeholder="Enter your message…" class="form-control"></textarea>
+          </div>
+          <div class="form-group"> 
+            <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" class="form-control" style="width:100%;"></div>
+            <button type="buton" onClick="submitToAPI(event)" class="btn btn-primary">Submit</button>
+          </div>
         </form>
       </div>
     </div>
