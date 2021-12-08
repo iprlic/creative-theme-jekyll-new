@@ -20,13 +20,18 @@
             <textarea required id="description-input" rows="3" placeholder="Enter your message…" class="form-control"></textarea>
           </div>
           <div class="form-group"> 
-            <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" class="form-control" style="width:100%;"></div>
-            <button type="buton" onClick="submitToAPI(event)" class="btn btn-primary">Submit</button>
+            <button 
+              class="btn btn-primary g-recaptcha" 
+              data-sitekey="{{ site.recaptcha_key }}"
+              data-callback='onSubmit' 
+              data-action='submit'>
+              Submit
+            </button>
           </div>
         </form>
       </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-5">
       {% for action in section.actions %}
       {% assign fa = action.icon_type | default: "fas" %}
       <div class="col ml-auto text-center">
@@ -37,3 +42,25 @@
     </div>
   </div>
 </section>
+
+
+<script>
+  async function onSubmit(token) {
+    const res = await fetch('{{ site.form_post_url }}', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: document.getElementById('email-input').value,
+        message: document.getElementById('description-input').value
+      })
+    });
+    if(res.status === 201){
+      document.getElementById('contact-form').innerHTML = "<h2>Thank you for contacting us. We'll get back to you soon.</h2>";
+    }else{
+      document.getElementById('contact-form').innerHTML = "<h2 style='color:red'>Error occured. Please try again later</h2>";
+    }
+  }
+</script>
